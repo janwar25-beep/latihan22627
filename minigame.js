@@ -1,16 +1,33 @@
 // variabel untuk menyimpan porsi makan kucing
 // dengan nilai awal nol (0)
-let porsi = 0
+let porsi = 1
+
+// siapkan aset suara di variabel 
+let suaraMakan = new Audio("minigame/makan.mp3")
+let suaramain = new Audio("minigame/main.mp3")
+let suarariset = new Audio("minigame/reset.mp3")
 
 function beriMakan() {
-  // tambah porsi makan +1
-  porsi = porsi + 1
+  // efek suara makan
+  suaraMakan.currentTime =0
+  suaraMakan.play()
+  // tambahkan porsi makanan 
+  // 1. ambil teks dari input kontak teks
+  let teksinput = document.getElementById('input-makanan').value
+  
+  // 2. ubah string menjadi angka
+  let jumlahmakanan = Number(teksinput)
+  
+  // 3.operasi penjumlahan angka
+  porsi = porsi + jumlahmakanan
   
   updateTampilan()
 }
 
 // fungsi mengajak main kucing (porsi dikurangi 1)
 function ajakMain() {
+  suaramain.currentTime = 0
+  suaramain.play()
   // mengurangi porsi 1 tapi cegah jangan sampai negatif
   if (porsi > 0) {
     porsi = porsi - 1
@@ -20,6 +37,11 @@ function ajakMain() {
 }
 
 function reset() {
+  //efek suara riset
+  suarariset.currentTime = 0
+  suarariset.play()
+  
+  
   porsi = 0
   
   updateTampilan()
@@ -47,6 +69,6 @@ function updateTampilan() {
     document.getElementById('foto-kucing').src = "minigame/kucing1.png"
     
     // menampilkan tulisan kucing kurus
-    document.getElementById('status-kucing').innerText = "Kucing Kurus 😼"
+    document.getElementById('status-kucing').innerText = "Kucing Kurus😼"
   }
 }
